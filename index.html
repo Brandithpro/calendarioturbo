@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendário Turbo IA</title>
+    <!-- Tailwind CSS via CDN para um design moderno e responsivo -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col items-center justify-center p-4">
+
+    <div class="max-w-2xl w-full bg-slate-800 rounded-2xl shadow-2xl p-6 border border-slate-700">
+        
+        <!-- Cabeçalho -->
+        <div class="text-center mb-6">
+            <span class="text-4xl">🚀</span>
+            <h1 class="text-2xl font-bold mt-2">Calendário Turbo IA</h1>
+            <p class="text-slate-400 text-sm mt-1">O seu gerador inteligente de conteúdos (100% Estável e Sem Erros)</p>
+        </div>
+
+        <!-- Formulário -->
+        <div class="space-y-4">
+            <div>
+                <label class="block text-sm font-medium text-slate-300 mb-1">Qual é o seu nicho?</label>
+                <input 
+                    type="text" 
+                    id="nicho" 
+                    placeholder="Ex: Supermercado, Imóveis, Seguros, Clínica..." 
+                    class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-sm focus:outline-none focus:border-blue-500 text-slate-100"
+                >
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-slate-300 mb-1">Produto ou Serviço em Foco</label>
+                <input 
+                    type="text" 
+                    id="produto" 
+                    placeholder="Ex: Ofertas de Hortifrúti, Minha Casa Minha Vida, Seguros Corporate..." 
+                    class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-sm focus:outline-none focus:border-blue-500 text-slate-100"
+                >
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-slate-300 mb-1">Objetivo da Campanha</label>
+                <select 
+                    id="objetivo" 
+                    class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-sm focus:outline-none focus:border-blue-500 text-slate-100"
+                >
+                    <option value="Viralizar (Topo de Funil)">🚀 Viralizar (Topo de Funil)</option>
+                    <option value="Gerar Autoridade">🎯 Gerar Autoridade</option>
+                    <option value="Vender Produto / Serviço">💰 Vender Produto / Serviço</option>
+                </select>
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-slate-300 mb-1">Tom de Voz</label>
+                <select 
+                    id="tom" 
+                    class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-sm focus:outline-none focus:border-blue-500 text-slate-100"
+                >
+                    <option value="Descontraído e Acolhedor">Descontraído e Acolhedor</option>
+                    <option value="Firme e Comercial">Firme e Comercial</option>
+                    <option value="Direto ao Ponto e Profissional">Direto ao Ponto e Profissional</option>
+                </select>
+            </div>
+
+            <button 
+                onclick="gerarCalendario()" 
+                id="btnGerar"
+                class="w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold py-3 rounded-lg transition duration-200 shadow-lg cursor-pointer"
+            >
+                Gerar Meu Calendário Turbo
+            </button>
+        </div>
+
+        <!-- Área de Resultados -->
+        <div id="resultadoContainer" class="mt-8 space-y-6 hidden">
+            <h2 class="text-xl font-bold text-blue-400 border-b border-slate-700 pb-2">Seu Planeamento de 7 Dias Pronto:</h2>
+            <div id="listaCalendario" class="space-y-4"></div>
+        </div>
+
+    </div>
+
+    <!-- Script de Lógica Inteligente Estática -->
+    <script>
+        const ganchos = [
+            "Você está a perder dinheiro com o seu negócio por pura falta de...",
+            "O maior erro que vejo profissionais deste mercado cometerem hoje é...",
+            "Ninguém te conta esta verdade nos bastidores, mas a realidade é que...",
+            "Se você quer transformar os resultados das suas vendas esta semana, presta atenção nisso...",
+            "O segredo dos líderes de mercado para dominar a atenção do cliente em 5 segundos."
+        ];
+
+        const desenvolvimento = [
+            "Muitos acham que o resultado vem da noite para o dia, mas a chave está na constância estratégica aplicada com inteligência.",
+            "Quando ajustamos o posicionamento para atrair o público certo, o jogo muda completamente. Veja o passo a passo nos slides.",
+            "A dor número um dos clientes é não saber por onde começar. Nós resolvemos isso entregando excelência com rapidez.",
+            "O mercado está saturado de promessas vazias. O que funciona de verdade é a validação prática no dia a dia."
+        ];
+
+        const ctas = [
+            "Comenta 'EU QUERO' abaixo que eu te envio os detalhes no direct!",
+            "Clica no link da bio e garante o teu acesso imediato.",
+            "Marca nos comentários aquele amigo que precisa saber disso hoje mesmo!",
+            "Salva este post para não esquecer e partilha com quem precisa de ver isto."
+        ];
+
+        const visuais = [
+            "Vídeo estilo Reels/TikTok direto para a câmara, fundo limpo, corte dinâmico a cada 2 segundos.",
+            "Carrossel de imagens em tom minimalista com tipografia forte em destaque.",
+            "Print real de resultado ou bastidor de atendimento com legenda em cima.",
+            "Vídeo estilo 'Antes e Depois' mostrando a transformação prática gerada."
+        ];
+
+        function gerarCalendario() {
+            const nicho = document.getElementById('nicho').value.trim();
+            const produto = document.getElementById('produto').value.trim();
+            const objetivo = document.getElementById('objetivo').value;
+            const container = document.getElementById('resultadoContainer');
+            const lista = document.getElementById('listaCalendario');
+
+            if (!nicho || !produto) {
+                alert("Por favor, preencha o nicho e o produto.");
+                return;
+            }
+
+            lista.innerHTML = "";
+            container.classList.remove('hidden');
+
+            const formatos = ['Reels', 'Carrossel', 'Post Estático', 'Reels', 'Carrossel', 'Post Estático', 'Reels'];
+            let htmlConteudo = '';
+
+            for (let i = 1; i <= 7; i++) {
+                // Sorteio dinâmico baseado nos dados inseridos
+                const g = ganchos[(i + nicho.length) % ganchos.length];
+                const d = desenvolvimento[(i * 3) % desenvolvimento.length];
+                const c = ctas[i % ctas.length];
+                const v = visuais[(i + produto.length) % visuais.length];
+
+                htmlConteudo += `
+                    <div class="bg-slate-900 border border-slate-700 rounded-xl p-4 space-y-2">
+                        <div class="flex justify-between items-center">
+                            <span class="bg-blue-600 text-white text-xs font-bold px-2.5 py-1 rounded-md">Dia ${i}</span>
+                            <span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded-md border border-slate-700 font-semibold">${formatos[i-1]}</span>
+                        </div>
+                        <p class="font-semibold text-sm text-slate-200">Dia ${i}: Estratégia de ${objetivo} para ${nicho}</p>
+                        <div class="bg-slate-800/60 p-3 rounded-lg text-xs text-slate-300 space-y-1">
+                            <p><strong class="text-blue-300">Sugestão Visual:</strong> ${v}</p>
+                            <p><strong class="text-green-300">Roteiro / Gancho:</strong> ${g} ${d}</p>
+                        </div>
+                        <div class="text-xs text-slate-400 bg-slate-950 p-3 rounded-lg whitespace-pre-wrap font-mono">
+Como usar ${produto} para acelerar os seus resultados em ${nicho}.
+
+${d}
+
+${c}
+
+#${nicho.replace(/\s+/g, '')} #${produto.replace(/\s+/g, '')} #MarketingDigital #EstratégiaDeConteúdo #Crescimento
+                        </div>
+                    </div>
+                `;
+            }
+
+            lista.innerHTML = htmlConteudo;
+        }
+    </script>
+</body>
+</html>
